@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 接口的全类名 -->
+<mapper namespace="mapper.LoginMapper">
+
+
+<!-- 登录操作 -->
+ <select id="Denglu" parameterType="bean.Login" resultType="bean.Login" >
+   select * 
+        from login
+        <where>
+			<if test="username != null and username != ''">
+				and `username` = #{username}
+				
+			</if>
+			<if test="password != null and password != ''">
+				and `password` = #{password}
+			</if>
+		</where>
+
+
+ </select>
+ 
+ <!-- 注册操作 -->
+ <insert id="Zhuce" parameterType="bean.Login" >
+       insert into 
+       login
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				#{username},
+			</if>
+			<if test="password != null">
+				#{password}
+			</if>
+			
+		</trim>
+ </insert>
+ 
+ <!-- 修改管理员密码 -->
+ 
+ <update id="editpassword" parameterType="bean.Login">
+ update login set password = #{password}
+ where username = #{username}
+ </update>
+ 
+ <!-- 学生登录操作 -->
+  <select id="studentDenglu" parameterType="bean.Student" resultType="bean.Student" >
+   select * 
+        from student
+        <where>
+			<if test="username != null and username != ''">
+				and `username` = #{username}
+				
+			</if>
+			<if test="password != null and password != ''">
+				and `password` = #{password}
+			</if>
+		</where>
+
+
+ </select>
+ 
+ <!-- 学生注册操作 -->
+  <insert id="studentZhuce" parameterType="bean.Student" >
+       insert into 
+       student
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				#{username},
+			</if>
+			<if test="password != null">
+				#{password}
+			</if>
+			
+		</trim>
+ </insert>
+ 
+</mapper>

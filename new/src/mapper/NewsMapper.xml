@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 接口的全类名 -->
+<mapper namespace="mapper.NewsMapper">
+ <select id="queryNewsZhuti" parameterType="String" resultType="bean.News" >
+   select * from news where zhuti = #{zhuti}
+ </select>
+ 
+ 
+ 
+ 
+ <!-- 查询所有新闻 -->
+ <select id="queryallnews" resultType="bean.News">
+    select * from news 
+ </select>
+ 
+ 
+ <!-- 修改新闻 -->
+ <update id="editnews" parameterType="bean.News">
+ update news set lanmu=#{lanmu},
+ fujian=#{fujian},
+ neirong=#{neirong},
+ newname=#{neirong},
+ newname=#{newname},
+ phone=#{phone},
+ email=#{email}
+ ,youbuan=#{youbuan} where zhuti=#{zhuti}
+ </update>
+ 
+ <!-- 删除新闻 -->
+ <delete id="deletenews" parameterType="String">
+   delete from news  where zhuti = #{zhuti}
+ </delete>
+ 
+ 
+ <!-- 添加新闻 -->
+ <insert id="addnwes" parameterType="bean.News">
+ insert into news (zhuti,lanmu,fujian,neirong,newname,phone,email,youbuan)
+  values (#{zhuti},#{lanmu},#{fujian},#{neirong},#{newname},#{phone},#{email},#{youbuan})
+ </insert>
+ 
+ <!-- 分页操作   查询总记录数-->
+   <select id="totalCount"  resultType="int" > 
+   select count(*) from news
+   </select>
+   
+   <!-- 分页sql -->
+   <select id="queryPage" parameterType="bean.Page"  resultType="bean.News">
+   
+    select * from news  order by zhuti asc
+    limit #{currentPage},#{pageSize}
+		
+   </select>
+   
+
+   <!-- 按新闻类别查询新闻 --> 
+ <select id="queryNewsZhutilei" parameterType="String" resultMap="newleinew" >
+   select n.*,e.* from newlei n
+   inner join news e
+   on n.newid = e.id 
+   where n.newleibie =#{newleibie}
+ </select>
+<resultMap type="bean.Newlei" id="newleinew">
+  <id property="newid" column="newid"></id>
+  <result property="newleibie" column="newleibie" ></result> 
+  <collection property="news" ofType="bean.News" >
+    <id property="zhuti" column="zhuti"></id>
+    <result property="lanmu" column="lanmu" ></result>
+    <result property="fujian" column="fujian" ></result>
+    <result property="neirong" column="neirong" ></result>
+    <result property="newname" column="newname" ></result>
+    <result property="phone" column="phone" ></result>
+    <result property="email" column="email" ></result>
+    <result property="youbuan" column="youbuan" ></result>
+    </collection>
+</resultMap>
+</mapper>
+

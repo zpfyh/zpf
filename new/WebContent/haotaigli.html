@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新闻发布后台管理系统</title>
+		<link rel="shortcut icon" href="img/favicon.ico"/>
+		<link rel="stylesheet" href="css/haotaigli.css" />
+	</head>
+	<body>
+		
+		<div class="biaoti">
+		            <div class="b1">
+		            	<h2>欢迎进入新闻发布后台管理系统</h2>
+		            </div>
+		            <div class="b2"><span>欢迎管理员：admin&nbsp;现在是北京时间：2015年1月1日 11:11  星期一
+		            	
+		            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="new.html">退出系统</a></span></div>
+		</div>
+		
+		<div class="nav">
+			       <div class="nav1">
+			  
+                     <ul>
+                     	<li>
+                     		  <div class="nav222"><a>添加新闻</a></div>
+                     		  <div class="g1">
+                     		  	<form action="AddbookServlet" method="post">
+                     		  		
+                                                                      新闻主题：<input type="text" name="zhuti"><br>
+                                                                      新闻栏目：<input type="text" name="lanmu"><br>
+                                                                      新闻附件：<textarea cols="50" rows="10" name="fujian"></textarea><br>
+                                                                       新闻内容：<textarea cols="50" rows="10" name="neirong"></textarea><br>
+                                                                     发布者姓名：<input type="text" name="newname"><br>
+                                                                     手机号：<input type="text" name="phone"><br>
+                                  email：<input type="text" name="email"><br>
+                                                                      邮编：<input type="text" name="youbuan"><br>
+                                    <input type="submit"  value="添加新闻"/>
+                                </form>
+                     		  	
+                     		  </div>
+                     	</li>
+                     	<li>
+                     		 <div class="nav444"><a>查看所有新闻</a></div>
+                     		  <div class="g2">
+                     		  	
+                     		  	
+                     		  </div>
+                     	</li>
+                     	<li>
+                     		 <div class="nav333"><a>按主题查询新闻</a></div>
+                     		  <div class="g3">
+                     		  	<form action="DeleteBookServlet" method="post">
+
+                                                                       书号：<input type="text" name="id"><br>
+                                   <input type="submit" value="删除图书">
+                                  </form>
+                     		  	
+                     		  </div>
+                     	</li>
+                     	<li>
+                     		<div class="nav555"><a>删除新闻</a></div>
+                     		  <div class="g4">
+                     		  	<form action="UpdatebookServlet" method="post">
+
+                                                                         书号：<input type="text" name="id"><br>
+                                                                           书名：<input type="text" name="bookname"><br>
+                                                                             作者：<input type="text" name="author"><br>
+                                                                               出版社：<input type="text" name="press"><br>
+                                                                              价格：<input type="text" name="price"><br>
+                                           <input type="submit" value="修改图书">
+                                       </form>
+                     		  	
+                     		  </div>
+                     	</li>
+                     	<li>
+                     		 <div class="nav666"><a>修改新闻</a></div>
+                     		  <div class="g5">
+                     		  	<form action="SelectBookid" method="post">
+
+                                                                
+                                  </form>
+                     		  	
+                     		  </div>
+                     	</li>
+                     	
+                     	<li>
+                     		 <div class="nav666"><a>查看浏览者留言</a></div>
+                     		  <div class="g5">
+                     		  	<form action="SelectBookid" method="post">
+
+                                                               
+                                  </form>
+                     		  	
+                     		  </div>
+                     	</li>
+                     	
+                     	<li>
+                     		 <div class="nav666"><a>删除不良留言</a></div>
+                     		  <div class="g5">
+                     		  	<form action="SelectBookid" method="post">
+
+                                                               
+                     		  	
+                     		  </div>
+                     	</li>
+                     	
+                     	     	<li>
+                     		 <div class="nav666"><a>修改管理员密码</a></div>
+                     		  <div class="g5">
+                     		  	<form action="SelectBookid" method="post">
+
+                     		  	
+                     		  </div>
+                     	</li>
+                     </ul>
+                       
+			       </div>
+			    
+		</div>
+	</body>
+</html>

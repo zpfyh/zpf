@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 接口的全类名 -->
+<mapper namespace="mapper.CommitMapper">
+
+
+<!-- 留言 -->
+   <insert id="addluyan" parameterType="bean.Commit">
+   
+   insert into 
+   commit 
+   (commitname,committime,commitneirong) 
+   values
+   (#{commitname},#{committime},#{commitneirong})
+   
+   </insert>
+ 
+ 
+ <!-- 查看留言 -->
+ <select id="queryliuyan" resultType="bean.Commit">
+ select * from commit
+ </select>
+ 
+ <delete id="deleteliuyan" parameterType="String">
+ delete from commit where commitname = #{cimmitname}
+ </delete>
+ 
+</mapper>

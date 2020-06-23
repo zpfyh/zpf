@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 配置数据源和mapper文件 -->
+	<!-- 要让程序认识applicationContext.xml 需要在web.xml 配置applicationContext.xml 通过这个配置将spring纳入web项目 -->
+  <!-- 给service 注入dao-->
+  <bean id="newsservice" class="serviceimpl.NewsServiceimpl">
+  <property name="newsmapper" ref="newsMapper"></property>
+  </bean>
+ <bean id="loginserrvice" class="serviceimpl.LoginServiceimpl">
+ <property name="loginmapper" ref="loginMapper"></property>
+ </bean>
+ <bean id="commitservice" class="serviceimpl.CommitServiceimpl">
+ <property name="commitmapper" ref="commitMapper"></property>
+ </bean>
+<!--	配置数据源 -->
+<!--	 加载db.properties文件 -->
+	<bean id="congig"
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>classpath:db.properties</value>
+			</array>
+		</property>
+	</bean>
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+	<!--  第一步 配置MyBatias需要的核心类SqlSessionFactory  -->
+	 <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"></property>
+      <!-- 加载映射文件路径 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+    </bean>
+    <!-- 第二步  将MyBatias的SqlSessionFactory 交给Spring -->
+     <bean id="mappers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">    
+        <property name="sqlSessionFactoryBeanName" value="SqlSessionFactory"></property>     
+        <!-- 批量产生那个包的 -->
+        <property name="basePackage"  value="mapper"></property>
+      </bean>
+     <!-- 上面basePackage所在的property的作用：
+                    将 mapper包  所有接口与之产生动态代理对象 （对象名就是     首字母小写的接口名 ） 比如  studentMapper.queryStudentByStuno(); 
+      -->
+</beans>
+
